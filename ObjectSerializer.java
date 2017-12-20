@@ -1,3 +1,8 @@
+/* this code originally get it from Rob (Udemy course)
+it is an updated version for Android. if need the actual version of the code
+googe the class name, boom!
+*/
+
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
