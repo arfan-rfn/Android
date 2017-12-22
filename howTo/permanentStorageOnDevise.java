@@ -31,7 +31,7 @@ SharedPreferences sharedPreferences = Context.getSharedPreferences(String name, 
 try {
 sharedPreferences.edit().putString("key", ObjectSerializer.serialize(arrayList)).apply();
 } catch (IOException e) {
-    e.printStackTrace();
+	e.printStackTrace();
 }
 
 
@@ -40,5 +40,5 @@ ArrayList<String> newArray = new ArrayList<>();
 try {
 newArray = (ArrayList<String>) ObjectSerializer.deserialize(sharedPreferences.getString("key", ObjectSerializer.serialize(new ArrayList<String>())));
 } catch (IOException e) {
-    e.printStackTrace();
+	e.printStackTrace();
 }
