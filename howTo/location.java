@@ -25,6 +25,7 @@
         setContentView(R.layout.activity_main);
 
         // define LocationManaget and LocationListener.
+        // add them on <onMapReady/> if there have a map view
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -49,17 +50,28 @@
             }
         };
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            // if we don't have the permission we will request the permission to the user
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                // if we don't have the permission we will request the permission to the user
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
 
+            } else {
+
+                // if we already have the permission, we will get te location.
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+
+                /***** get the old know location if there have any ******/
+                Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                // do stuff
+            }
         }else {
 
-            // if we already have the permission, we will get te location. 
+            // if we already have the permission, we will get te location.
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
             /***** get the old know location if there have any ******/
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            // do stuff
         }
     }

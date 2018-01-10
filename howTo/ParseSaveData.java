@@ -160,3 +160,5 @@ public class StarterApplication extends Application {
   }
 }
 /************************** end ***********************/
+// add that line on Main_activity onCreate method
+ParseAnalytics.trackAppOpenedInBackground(getIntent());
